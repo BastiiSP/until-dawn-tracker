@@ -1,5 +1,7 @@
 # Until Dawn Decision Tracker — Project Bible
 
+> **Implementation status:** This document describes the target architecture. File paths marked in code blocks are the planned structure — some may not exist yet during active development.
+
 ## Overview
 A Progressive Web App for tracking decisions across multiple Until Dawn
 playthroughs. Users log in via magic link, create named runs, track the
@@ -80,7 +82,7 @@ Set locally in `.env.local`. Set on Vercel via dashboard or `vercel env add`.
 | `npm run build`    | Production build                     |
 | `npm run start`    | Serve production build locally       |
 | `npm run lint`     | ESLint                               |
-| `npx supabase gen types typescript --project-id <ref> > src/types/database.ts` | Regenerate DB types |
+| `mkdir -p src/types && npx supabase gen types typescript --project-id <ref> > src/types/database.ts` | Regenerate DB types |
 | `vercel env add`   | Add env var to Vercel project        |
 | `vercel --prod`    | Deploy to production                 |
 
@@ -100,6 +102,7 @@ The `vercel.json` / `vercel.ts` is not needed — Vercel auto-detects Next.js.
 - **Server vs Client:** default to Server Component; add `'use client'`
   only when hooks/interactivity needed
 - **Tailwind:** use `cn()` helper (clsx + tailwind-merge) for conditional classes
+- **Icons:** use `lucide-react` exclusively — no other icon libraries
 - **No comments** unless behavior would surprise a reader
 - **New butterfly effect:** add to `src/lib/data/butterfly-effects.ts` only;
   no DB migration needed
