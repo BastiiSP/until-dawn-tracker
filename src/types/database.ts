@@ -28,6 +28,7 @@ export interface Database {
           created_at?: string
           user_id?: string
         }
+        Relationships: []
       }
       characters: {
         Row: {
@@ -48,6 +49,7 @@ export interface Database {
           name?: string
           status?: 'alive' | 'dead' | 'unknown'
         }
+        Relationships: []
       }
       decisions: {
         Row: {
@@ -74,7 +76,10 @@ export interface Database {
           chosen_option?: string
           timestamp?: string
         }
+        Relationships: []
       }
     }
+    Views: Record<string, never>
+    Functions: Record<string, never>
   }
 }
