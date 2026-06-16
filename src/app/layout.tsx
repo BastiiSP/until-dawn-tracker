@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from 'next'
-import { Inter, Cinzel } from 'next/font/google'
+import { Inter, Cinzel, Cinzel_Decorative } from 'next/font/google'
 import './globals.css'
 import { SnowEffect } from '@/components/effects/SnowEffect'
 import { LightningEffect } from '@/components/effects/LightningEffect'
@@ -10,6 +10,12 @@ const cinzel = Cinzel({
   subsets: ['latin'],
   display: 'swap',
   variable: '--font-cinzel-loaded',
+  weight: ['400', '700', '900'],
+})
+const cinzelDecorative = Cinzel_Decorative({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-cinzel-decorative',
   weight: ['400', '700', '900'],
 })
 
@@ -36,8 +42,8 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
-      <body className={`${inter.className} ${cinzel.variable} bg-horror-bg text-horror-text antialiased`}>
+    <html lang="de">
+      <body className={`${inter.className} ${cinzel.variable} ${cinzelDecorative.variable} bg-horror-bg text-horror-text antialiased`}>
         <SnowEffect />
         <LightningEffect />
         <MountainSilhouette />

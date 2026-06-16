@@ -27,29 +27,55 @@ function LoginForm() {
     <main className="min-h-screen flex items-center justify-center px-4">
       <div className="w-full max-w-sm">
         <div className="mb-8 flex flex-col items-center text-center">
-          {/* Hourglass — Until Dawn's iconic symbol */}
+          {/* Until Dawn iconic hourglass — black body, gold frame, title integrated */}
           <svg
-            viewBox="0 0 40 60"
-            className="w-10 h-14 text-horror-accent opacity-60 mb-5"
-            fill="currentColor"
+            viewBox="0 0 80 110"
+            className="w-16 h-[88px] mb-5"
+            xmlns="http://www.w3.org/2000/svg"
             aria-hidden
           >
-            <rect x="3" y="0" width="34" height="3" rx="1" />
-            <rect x="3" y="57" width="34" height="3" rx="1" />
+            {/* Outer gold frame — top bar */}
+            <rect x="4" y="0" width="72" height="6" rx="2" fill="#c9a84c" />
+            {/* Outer gold frame — bottom bar */}
+            <rect x="4" y="104" width="72" height="6" rx="2" fill="#c9a84c" />
+
+            {/* Hourglass body outline */}
             <path
-              d="M5,3 L35,3 L20,29 L35,57 L5,57 L20,29 Z"
-              fill="none"
-              stroke="currentColor"
+              d="M8,6 L72,6 L40,52 L72,104 L8,104 L40,52 Z"
+              fill="#0a0a0a"
+              stroke="#c9a84c"
               strokeWidth="1.5"
             />
-            <path d="M8,5 L32,5 L20,25 Z" opacity="0.35" />
-            <line x1="20" y1="29" x2="20" y2="36" stroke="currentColor" strokeWidth="1" opacity="0.55" />
-            <path d="M13,55 L27,55 L24,41 L16,41 Z" opacity="0.45" />
+
+            {/* Upper sand (draining) */}
+            <path d="M12,9 L68,9 L40,46 Z" fill="#c9a84c" opacity="0.25" />
+
+            {/* Sand stream at neck */}
+            <line x1="40" y1="52" x2="40" y2="62" stroke="#c9a84c" strokeWidth="1.5" opacity="0.6" />
+
+            {/* Lower sand (accumulating) */}
+            <path d="M22,101 L58,101 L52,72 L28,72 Z" fill="#c9a84c" opacity="0.35" />
+
+            {/* Decorative side pillars */}
+            <rect x="4" y="6" width="4" height="98" rx="1" fill="#1a1a1a" stroke="#c9a84c" strokeWidth="0.5" />
+            <rect x="72" y="6" width="4" height="98" rx="1" fill="#1a1a1a" stroke="#c9a84c" strokeWidth="0.5" />
+
+            {/* "UNTIL DAWN" text integrated into middle */}
+            <text
+              x="40"
+              y="56"
+              textAnchor="middle"
+              fill="#c9a84c"
+              fontSize="5"
+              fontFamily="Georgia, serif"
+              letterSpacing="2"
+              fontWeight="bold"
+            >UNTIL DAWN</text>
           </svg>
           <h1 className="font-cinzel text-4xl font-black text-horror-accent tracking-widest text-glow-red animate-flicker">
             UNTIL DAWN
           </h1>
-          <p className="text-horror-muted text-xs tracking-widest uppercase mt-1">Blackwood Mountain — Decision Tracker</p>
+          <p className="text-horror-muted text-xs tracking-widest uppercase mt-1">Blackwood Mountain — Entscheidungs-Tracker</p>
         </div>
 
         {errorMsg && (
@@ -60,8 +86,8 @@ function LoginForm() {
 
         {sent ? (
           <div className="bg-horror-card border border-horror-border rounded-lg p-6 text-center">
-            <p className="text-horror-text">Check your email for the magic link.</p>
-            <p className="text-horror-muted text-sm mt-2">You can close this tab.</p>
+            <p className="text-horror-text">Prüfe deine E-Mails für den Magic Link.</p>
+            <p className="text-horror-muted text-sm mt-2">Du kannst diesen Tab schließen.</p>
           </div>
         ) : (
           <form onSubmit={handleSubmit} className="space-y-4">
@@ -69,7 +95,7 @@ function LoginForm() {
               type="email"
               value={email}
               onChange={e => setEmail(e.target.value)}
-              placeholder="your@email.com"
+              placeholder="deine@email.de"
               required
               className="w-full bg-horror-card border border-horror-border rounded-lg px-4 py-3 text-horror-text placeholder-horror-muted focus:outline-none focus:border-horror-accent transition-colors"
             />
@@ -78,7 +104,7 @@ function LoginForm() {
               disabled={loading}
               className="w-full bg-horror-accent hover:bg-horror-accent-hover disabled:opacity-50 text-white font-semibold rounded-lg px-4 py-3 transition-colors tap-target"
             >
-              {loading ? 'Sending…' : 'Send magic link'}
+              {loading ? 'Sende…' : 'Magic Link senden'}
             </button>
           </form>
         )}

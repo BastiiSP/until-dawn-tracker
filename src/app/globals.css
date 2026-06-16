@@ -16,6 +16,7 @@
   --color-horror-gold-dim: #3a2a0a;
 
   --font-cinzel: var(--font-cinzel-loaded), Georgia, serif;
+  --font-cinzel-decorative: var(--font-cinzel-decorative), Georgia, serif;
 
   --animate-pulse-red: pulse-red 2s ease-in-out infinite;
   --animate-flicker: flicker 8s ease-in-out infinite;
@@ -82,5 +83,13 @@
     border: 1px solid var(--color-horror-border);
     border-radius: 0.5rem;
     box-shadow: 0 4px 24px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255,255,255,0.02);
+  }
+
+  .font-cinzel-decorative {
+    font-family: var(--font-cinzel-decorative);
+  }
+
+  .text-glow-gold {
+    text-shadow: 0 0 15px rgba(201, 168, 76, 0.7), 0 0 30px rgba(201, 168, 76, 0.3);
   }
 }
