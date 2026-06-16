@@ -66,7 +66,7 @@ export function CharacterCard({ id, name, initialStatus }: CharacterCardProps) {
       )}>
         {!imgError ? (
           <img
-            src={`/characters/${name.toLowerCase()}.webp`}
+            src={`/characters/${name.toLowerCase()}.png`}
             alt={name}
             className="w-full h-full object-cover"
             onError={() => setImgError(true)}
