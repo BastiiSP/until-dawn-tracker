@@ -9,7 +9,7 @@ export default function LoginPage() {
   const [loading, setLoading] = useState(false)
   const supabase = createClient()
 
-  async function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: React.SyntheticEvent<HTMLFormElement>) {
     e.preventDefault()
     setLoading(true)
     const { error } = await supabase.auth.signInWithOtp({
