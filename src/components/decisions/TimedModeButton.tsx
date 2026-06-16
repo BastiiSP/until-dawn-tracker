@@ -5,7 +5,6 @@ interface TimedModeButtonProps {
   savedDecisions: Array<{ butterfly_effect_name: string; chosen_option: string }>
 }
 
-export function TimedModeButton({ runId, savedDecisions }: TimedModeButtonProps) {
-  // Implemented in Task 13
+export function TimedModeButton(_props: TimedModeButtonProps) {
   return null
 }
