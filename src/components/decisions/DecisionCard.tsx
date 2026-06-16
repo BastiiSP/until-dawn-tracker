@@ -48,6 +48,13 @@ export function DecisionCard({ effect, runId, existingChoice, comparisonChoice }
       effect.isTimed ? 'border-horror-accent animate-pulse-red' : 'border-horror-border'
     )}>
       <div className="flex items-center gap-2 mb-1">
+        {/* Butterfly — the game's butterfly effect symbol */}
+        <svg viewBox="0 0 20 14" className="w-3.5 h-2.5 text-horror-muted opacity-40 shrink-0" fill="currentColor" aria-hidden>
+          <path d="M10,7 C8,4 3,2 2,5 C1,8 5,9 10,7 Z" />
+          <path d="M10,7 C8,9 3,11 3,8.5 C3,6 6,7.5 10,7 Z" opacity="0.7" />
+          <path d="M10,7 C12,4 17,2 18,5 C19,8 15,9 10,7 Z" />
+          <path d="M10,7 C12,9 17,11 17,8.5 C17,6 14,7.5 10,7 Z" opacity="0.7" />
+        </svg>
         <span className="text-xs text-horror-muted">CH. {effect.chapter}</span>
         {effect.isTimed && (
           <span className="text-xs font-bold text-horror-accent tracking-widest">TIMED</span>

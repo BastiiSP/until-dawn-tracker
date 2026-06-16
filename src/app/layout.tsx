@@ -1,6 +1,9 @@
 import type { Metadata, Viewport } from 'next'
 import { Inter, Cinzel } from 'next/font/google'
 import './globals.css'
+import { SnowEffect } from '@/components/effects/SnowEffect'
+import { LightningEffect } from '@/components/effects/LightningEffect'
+import { MountainSilhouette } from '@/components/effects/MountainSilhouette'
 
 const inter = Inter({ subsets: ['latin'], display: 'swap' })
 const cinzel = Cinzel({
@@ -35,6 +38,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.className} ${cinzel.variable} bg-horror-bg text-horror-text antialiased`}>
+        <SnowEffect />
+        <LightningEffect />
+        <MountainSilhouette />
         {children}
       </body>
     </html>

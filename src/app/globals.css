@@ -15,6 +15,8 @@
 
   --animate-pulse-red: pulse-red 2s ease-in-out infinite;
   --animate-flicker: flicker 8s ease-in-out infinite;
+  --animate-snowfall: snowfall 10s linear infinite;
+  --animate-lightning: lightning 28s ease-in-out infinite;
 
   @keyframes pulse-red {
     0%, 100% { box-shadow: 0 0 5px rgba(220, 38, 38, 0.4); }
@@ -28,6 +30,19 @@
     94% { opacity: 0.85; }
     95% { opacity: 1; }
   }
+
+  @keyframes snowfall {
+    0% { transform: translateY(-10px) translateX(0px); opacity: 0; }
+    8% { opacity: 1; }
+    92% { opacity: 1; }
+    100% { transform: translateY(100vh) translateX(22px); opacity: 0; }
+  }
+
+  @keyframes lightning {
+    0%, 94.4%, 95.9%, 100% { background: transparent; }
+    95% { background: rgba(180, 210, 255, 0.08); }
+    95.5% { background: rgba(180, 210, 255, 0.14); }
+  }
 }
 
 @layer base {
@@ -35,9 +50,16 @@
     background-color: var(--color-horror-bg);
     background-image:
       radial-gradient(ellipse 80% 50% at 50% -10%, rgba(100, 0, 0, 0.25) 0%, transparent 60%),
-      radial-gradient(ellipse 60% 40% at 50% 110%, rgba(80, 0, 0, 0.2) 0%, transparent 60%);
+      radial-gradient(ellipse 60% 40% at 50% 110%, rgba(80, 0, 0, 0.2) 0%, transparent 60%),
+      radial-gradient(ellipse 40% 30% at 15% 70%, rgba(60, 60, 80, 0.05) 0%, transparent 70%),
+      radial-gradient(ellipse 35% 25% at 85% 60%, rgba(60, 60, 80, 0.04) 0%, transparent 70%);
     background-attachment: fixed;
     color: var(--color-horror-text);
+  }
+
+  main {
+    position: relative;
+    z-index: 1;
   }
 }
 

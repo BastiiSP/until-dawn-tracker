@@ -26,7 +26,26 @@ function LoginForm() {
   return (
     <main className="min-h-screen flex items-center justify-center px-4">
       <div className="w-full max-w-sm">
-        <div className="mb-8">
+        <div className="mb-8 flex flex-col items-center text-center">
+          {/* Hourglass — Until Dawn's iconic symbol */}
+          <svg
+            viewBox="0 0 40 60"
+            className="w-10 h-14 text-horror-accent opacity-60 mb-5"
+            fill="currentColor"
+            aria-hidden
+          >
+            <rect x="3" y="0" width="34" height="3" rx="1" />
+            <rect x="3" y="57" width="34" height="3" rx="1" />
+            <path
+              d="M5,3 L35,3 L20,29 L35,57 L5,57 L20,29 Z"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.5"
+            />
+            <path d="M8,5 L32,5 L20,25 Z" opacity="0.35" />
+            <line x1="20" y1="29" x2="20" y2="36" stroke="currentColor" strokeWidth="1" opacity="0.55" />
+            <path d="M13,55 L27,55 L24,41 L16,41 Z" opacity="0.45" />
+          </svg>
           <h1 className="font-cinzel text-4xl font-black text-horror-accent tracking-widest text-glow-red animate-flicker">
             UNTIL DAWN
           </h1>
