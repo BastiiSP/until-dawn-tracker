@@ -21,13 +21,13 @@ const STATUS_LABELS: Record<Status, string> = {
 const STATUS_OVERLAY: Record<Status, string> = {
   alive:   'ring-green-600',
   dead:    'ring-red-800',
-  unknown: 'ring-horror-border',
+  unknown: 'ring-[#2a5a7a]',
 }
 
 const STATUS_BADGE: Record<Status, string> = {
   alive:   'bg-green-900 text-green-300',
   dead:    'bg-red-950 text-red-400',
-  unknown: 'bg-horror-card text-horror-muted',
+  unknown: 'bg-[#0d2030] text-[#7db8cc]',
 }
 
 const CHARACTER_COLORS: Record<string, string> = {

@@ -10,6 +10,10 @@
   --color-horror-muted: #6b7280;
   --color-horror-success: #16a34a;
   --color-horror-warning: #ca8a04;
+  --color-horror-ice: #7db8cc;
+  --color-horror-ice-dim: #1a3a4e;
+  --color-horror-gold: #c9a84c;
+  --color-horror-gold-dim: #3a2a0a;
 
   --font-cinzel: var(--font-cinzel-loaded), Georgia, serif;
 
