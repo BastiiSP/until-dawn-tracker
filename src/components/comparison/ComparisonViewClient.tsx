@@ -15,13 +15,13 @@ interface RunRef {
   name: string
 }
 
-interface ComparisonViewProps {
+interface ComparisonViewClientProps {
   currentRunName: string
   currentDecisions: DecisionRecord[]
   otherRuns: RunRef[]
 }
 
-export function ComparisonView({ currentRunName, currentDecisions, otherRuns }: ComparisonViewProps) {
+export function ComparisonViewClient({ currentRunName, currentDecisions, otherRuns }: ComparisonViewClientProps) {
   const [selectedId, setSelectedId] = useState<string>(otherRuns[0]?.id ?? '')
   const [otherDecisions, setOtherDecisions] = useState<DecisionRecord[]>([])
   const supabase = createClient()
@@ -46,7 +46,7 @@ export function ComparisonView({ currentRunName, currentDecisions, otherRuns }: 
   if (otherRuns.length === 0) {
     return (
       <p className="text-horror-muted text-sm">
-        You need at least 2 runs to compare. Create another run first.
+        Du brauchst mindestens 2 Runs zum Vergleichen. Erstelle zuerst einen weiteren Run.
       </p>
     )
   }
@@ -57,8 +57,8 @@ export function ComparisonView({ currentRunName, currentDecisions, otherRuns }: 
 
   return (
     <div>
-      <label className="text-xs text-horror-muted uppercase tracking-widest block mb-2">
-        Compare against:
+      <label className="text-xs text-horror-muted uppercase tracking-widest block mb-2 font-cinzel">
+        Vergleichen mit:
       </label>
       <select
         value={selectedId}
@@ -71,17 +71,17 @@ export function ComparisonView({ currentRunName, currentDecisions, otherRuns }: 
       </select>
 
       <div className="grid grid-cols-2 gap-2 mb-4">
-        <span className="text-xs font-bold tracking-widest uppercase text-horror-text truncate">
+        <span className="text-xs font-bold tracking-widest uppercase text-horror-text truncate font-cinzel">
           {currentRunName}
         </span>
-        <span className="text-xs font-bold tracking-widest uppercase text-yellow-400 truncate">
+        <span className="text-xs font-bold tracking-widest uppercase text-yellow-400 truncate font-cinzel">
           {selectedRun?.name}
         </span>
       </div>
 
       {effectsWithData.length === 0 ? (
         <p className="text-horror-muted text-sm text-center py-8">
-          No decisions recorded in either run yet.
+          Noch keine Entscheidungen in einem der Runs aufgezeichnet.
         </p>
       ) : (
         <div className="space-y-2">
@@ -89,6 +89,10 @@ export function ComparisonView({ currentRunName, currentDecisions, otherRuns }: 
             const a = currentMap[effect.name]
             const b = otherMap[effect.name]
             const differs = Boolean(a && b && a !== b)
+
+            const labelA = a ? effect.optionsDe[effect.options.indexOf(a as typeof effect.options[0])] ?? a : undefined
+            const labelB = b ? effect.optionsDe[effect.options.indexOf(b as typeof effect.options[0])] ?? b : undefined
+
             return (
               <div
                 key={effect.id}
@@ -99,15 +103,15 @@ export function ComparisonView({ currentRunName, currentDecisions, otherRuns }: 
                     : 'border-horror-border bg-horror-card'
                 )}
               >
-                <p className="text-xs text-horror-muted mb-1">
-                  Ch.{effect.chapter} — {effect.name}
+                <p className="text-xs text-horror-muted mb-1 font-cinzel">
+                  Kap.{effect.chapter === 0 ? ' Prolog' : effect.chapter} — {effect.nameDe}
                 </p>
                 <div className="grid grid-cols-2 gap-2">
-                  <p className={cn('text-sm', a ? 'text-horror-text' : 'text-horror-muted italic')}>
-                    {a ?? 'Not recorded'}
+                  <p className={cn('text-sm', labelA ? 'text-horror-text' : 'text-horror-muted italic')}>
+                    {labelA ?? 'Nicht erfasst'}
                   </p>
-                  <p className={cn('text-sm', b ? 'text-yellow-400' : 'text-horror-muted italic')}>
-                    {b ?? 'Not recorded'}
+                  <p className={cn('text-sm', labelB ? 'text-yellow-400' : 'text-horror-muted italic')}>
+                    {labelB ?? 'Nicht erfasst'}
                   </p>
                 </div>
               </div>

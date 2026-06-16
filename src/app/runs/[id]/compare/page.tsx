@@ -2,7 +2,7 @@ import { createClient } from '@/lib/supabase/server'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import { ArrowLeft } from 'lucide-react'
-import { ComparisonView } from '@/components/comparison/ComparisonView'
+import { ComparisonViewClient } from '@/components/comparison/ComparisonViewClient'
 
 export default async function ComparePage({
   params,
@@ -36,10 +36,10 @@ export default async function ComparePage({
         <Link href={`/runs/${id}`} className="text-horror-muted tap-target flex items-center">
           <ArrowLeft size={20} />
         </Link>
-        <h1 className="text-xl font-bold text-horror-text">Compare Runs</h1>
+        <h1 className="text-xl font-bold text-horror-text font-cinzel">Vergleich</h1>
       </div>
 
-      <ComparisonView
+      <ComparisonViewClient
         currentRunName={currentRun.name}
         currentDecisions={currentDecisions ?? []}
         otherRuns={(allRuns ?? []).map(r => ({ id: r.id, name: r.name }))}
