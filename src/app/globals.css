@@ -1,26 +1,34 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@theme {
+  --color-horror-bg: #080808;
+  --color-horror-card: #111111;
+  --color-horror-border: #1f1f1f;
+  --color-horror-accent: #dc2626;
+  --color-horror-accent-hover: #b91c1c;
+  --color-horror-text: #e5e7eb;
+  --color-horror-muted: #6b7280;
+  --color-horror-success: #16a34a;
+  --color-horror-warning: #ca8a04;
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  --animate-pulse-red: pulse-red 2s ease-in-out infinite;
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  @keyframes pulse-red {
+    0%, 100% { box-shadow: 0 0 5px rgba(220, 38, 38, 0.4); }
+    50% { box-shadow: 0 0 20px rgba(220, 38, 38, 0.8), 0 0 40px rgba(220, 38, 38, 0.4); }
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer base {
+  body {
+    background-color: var(--color-horror-bg);
+    color: var(--color-horror-text);
+  }
+}
+
+@layer utilities {
+  .tap-target {
+    min-height: 48px;
+    min-width: 48px;
+  }
 }
