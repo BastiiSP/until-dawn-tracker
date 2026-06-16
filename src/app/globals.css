@@ -16,7 +16,7 @@
   --color-horror-gold-dim: #3a2a0a;
 
   --font-cinzel: var(--font-cinzel-loaded), Georgia, serif;
-  --font-cinzel-decorative: var(--font-cinzel-decorative), Georgia, serif;
+  --font-cinzel-decorative: var(--font-cinzel-dec-loaded), Georgia, serif;
 
   --animate-pulse-red: pulse-red 2s ease-in-out infinite;
   --animate-flicker: flicker 8s ease-in-out infinite;

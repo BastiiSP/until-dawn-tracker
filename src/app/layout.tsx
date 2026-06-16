@@ -15,7 +15,7 @@ const cinzel = Cinzel({
 const cinzelDecorative = Cinzel_Decorative({
   subsets: ['latin'],
   display: 'swap',
-  variable: '--font-cinzel-decorative',
+  variable: '--font-cinzel-dec-loaded',
   weight: ['400', '700', '900'],
 })
 
