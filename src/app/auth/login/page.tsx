@@ -26,10 +26,12 @@ function LoginForm() {
   return (
     <main className="min-h-screen flex items-center justify-center px-4">
       <div className="w-full max-w-sm">
-        <h1 className="text-3xl font-bold text-horror-accent mb-2 tracking-tight">
-          Until Dawn
-        </h1>
-        <p className="text-horror-muted mb-8 text-sm">Decision Tracker</p>
+        <div className="mb-8">
+          <h1 className="font-cinzel text-4xl font-black text-horror-accent tracking-widest text-glow-red animate-flicker">
+            UNTIL DAWN
+          </h1>
+          <p className="text-horror-muted text-xs tracking-widest uppercase mt-1">Blackwood Mountain — Decision Tracker</p>
+        </div>
 
         {errorMsg && (
           <div className="bg-red-950 border border-red-800 rounded-lg p-3 mb-4 text-sm text-red-300">

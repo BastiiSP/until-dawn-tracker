@@ -1,8 +1,14 @@
 import type { Metadata, Viewport } from 'next'
-import { Inter } from 'next/font/google'
+import { Inter, Cinzel } from 'next/font/google'
 import './globals.css'
 
 const inter = Inter({ subsets: ['latin'], display: 'swap' })
+const cinzel = Cinzel({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-cinzel-loaded',
+  weight: ['400', '700', '900'],
+})
 
 export const metadata: Metadata = {
   title: 'Until Dawn Tracker',
@@ -16,7 +22,7 @@ export const metadata: Metadata = {
 }
 
 export const viewport: Viewport = {
-  themeColor: '#080808',
+  themeColor: '#050505',
   width: 'device-width',
   initialScale: 1,
 }
@@ -28,7 +34,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${inter.className} bg-horror-bg text-horror-text antialiased`}>
+      <body className={`${inter.className} ${cinzel.variable} bg-horror-bg text-horror-text antialiased`}>
         {children}
       </body>
     </html>

@@ -1,9 +1,9 @@
 @import "tailwindcss";
 
 @theme {
-  --color-horror-bg: #080808;
-  --color-horror-card: #111111;
-  --color-horror-border: #1f1f1f;
+  --color-horror-bg: #050505;
+  --color-horror-card: #0e0e0e;
+  --color-horror-border: #1a1a1a;
   --color-horror-accent: #dc2626;
   --color-horror-accent-hover: #b91c1c;
   --color-horror-text: #e5e7eb;
@@ -11,17 +11,32 @@
   --color-horror-success: #16a34a;
   --color-horror-warning: #ca8a04;
 
+  --font-cinzel: var(--font-cinzel-loaded), Georgia, serif;
+
   --animate-pulse-red: pulse-red 2s ease-in-out infinite;
+  --animate-flicker: flicker 8s ease-in-out infinite;
 
   @keyframes pulse-red {
     0%, 100% { box-shadow: 0 0 5px rgba(220, 38, 38, 0.4); }
     50% { box-shadow: 0 0 20px rgba(220, 38, 38, 0.8), 0 0 40px rgba(220, 38, 38, 0.4); }
+  }
+
+  @keyframes flicker {
+    0%, 90%, 100% { opacity: 1; }
+    91% { opacity: 0.8; }
+    92% { opacity: 1; }
+    94% { opacity: 0.85; }
+    95% { opacity: 1; }
   }
 }
 
 @layer base {
   body {
     background-color: var(--color-horror-bg);
+    background-image:
+      radial-gradient(ellipse 80% 50% at 50% -10%, rgba(100, 0, 0, 0.25) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 40% at 50% 110%, rgba(80, 0, 0, 0.2) 0%, transparent 60%);
+    background-attachment: fixed;
     color: var(--color-horror-text);
   }
 }
@@ -30,5 +45,16 @@
   .tap-target {
     min-height: 48px;
     min-width: 48px;
+  }
+
+  .text-glow-red {
+    text-shadow: 0 0 20px rgba(220, 38, 38, 0.6), 0 0 40px rgba(220, 38, 38, 0.3);
+  }
+
+  .horror-card {
+    background: var(--color-horror-card);
+    border: 1px solid var(--color-horror-border);
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255,255,255,0.02);
   }
 }

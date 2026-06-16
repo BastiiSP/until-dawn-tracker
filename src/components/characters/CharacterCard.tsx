@@ -12,16 +12,28 @@ const STATUS_CYCLE: Record<Status, Status> = {
   dead:    'unknown',
 }
 
-const STATUS_STYLES: Record<Status, string> = {
-  alive:   'border-green-700 bg-green-950 text-green-400',
-  dead:    'border-red-900 bg-red-950 text-red-400',
-  unknown: 'border-horror-border bg-horror-card text-horror-muted',
-}
-
 const STATUS_LABELS: Record<Status, string> = {
   alive:   'ALIVE',
   dead:    'DEAD',
   unknown: '?',
+}
+
+const STATUS_OVERLAY: Record<Status, string> = {
+  alive:   'ring-green-600',
+  dead:    'ring-red-800',
+  unknown: 'ring-horror-border',
+}
+
+const STATUS_BADGE: Record<Status, string> = {
+  alive:   'bg-green-900 text-green-300',
+  dead:    'bg-red-950 text-red-400',
+  unknown: 'bg-horror-card text-horror-muted',
+}
+
+const CHARACTER_COLORS: Record<string, string> = {
+  Sam: '#3b82f6', Mike: '#22c55e', Ashley: '#ec4899',
+  Chris: '#f97316', Josh: '#a855f7', Jessica: '#eab308',
+  Emily: '#ef4444', Matt: '#14b8a6',
 }
 
 interface CharacterCardProps {
@@ -32,24 +44,54 @@ interface CharacterCardProps {
 
 export function CharacterCard({ id, name, initialStatus }: CharacterCardProps) {
   const [status, setStatus] = useState<Status>(initialStatus)
+  const [imgError, setImgError] = useState(false)
   const supabase = createClient()
+  const accentColor = CHARACTER_COLORS[name] ?? '#6b7280'
 
   async function toggle() {
     const next = STATUS_CYCLE[status]
-    setStatus(next) // optimistic update
+    setStatus(next)
     await supabase.from('characters').update({ status: next }).eq('id', id)
   }
 
   return (
     <button
       onClick={toggle}
-      className={cn(
-        'flex flex-col items-center justify-center rounded-lg border p-3 gap-1 transition-all active:scale-95 tap-target w-full',
-        STATUS_STYLES[status]
-      )}
+      className="flex flex-col items-center gap-2 w-full active:scale-95 transition-transform tap-target group"
     >
-      <span className="text-sm font-semibold leading-tight">{name}</span>
-      <span className="text-xs font-bold tracking-widest">{STATUS_LABELS[status]}</span>
+      <div className={cn(
+        'relative w-16 h-16 rounded-full overflow-hidden ring-2 transition-all',
+        STATUS_OVERLAY[status],
+        'group-active:ring-4'
+      )}>
+        {!imgError ? (
+          <img
+            src={`/characters/${name.toLowerCase()}.webp`}
+            alt={name}
+            className="w-full h-full object-cover"
+            onError={() => setImgError(true)}
+          />
+        ) : (
+          <div
+            className="w-full h-full flex items-center justify-center text-xl font-bold text-white"
+            style={{ backgroundColor: accentColor + '33', border: `2px solid ${accentColor}55` }}
+          >
+            <span style={{ color: accentColor }}>{name[0]}</span>
+          </div>
+        )}
+        {status === 'dead' && (
+          <div className="absolute inset-0 bg-red-950/70 flex items-center justify-center">
+            <span className="text-red-400 text-lg">✕</span>
+          </div>
+        )}
+      </div>
+
+      <div className="flex flex-col items-center gap-0.5">
+        <span className="text-xs font-semibold text-horror-text leading-tight">{name}</span>
+        <span className={cn('text-[10px] font-bold tracking-widest px-1.5 py-0.5 rounded', STATUS_BADGE[status])}>
+          {STATUS_LABELS[status]}
+        </span>
+      </div>
     </button>
   )
 }

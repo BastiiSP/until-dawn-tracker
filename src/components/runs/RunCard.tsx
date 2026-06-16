@@ -16,8 +16,8 @@ export function RunCard({ id, name, createdAt }: RunCardProps) {
     <Link
       href={`/runs/${id}`}
       className={cn(
-        'flex items-center justify-between',
-        'bg-horror-card border border-horror-border rounded-lg px-4 py-4',
+        'flex items-center justify-between px-4 py-4',
+        'horror-card border-l-2 border-l-horror-accent/40 hover:border-l-horror-accent',
         'hover:border-horror-accent transition-colors active:scale-[0.98] tap-target'
       )}
     >

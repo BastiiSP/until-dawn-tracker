@@ -12,14 +12,9 @@ interface CharacterGridProps {
 
 export function CharacterGrid({ characters }: CharacterGridProps) {
   return (
-    <div className="grid grid-cols-4 gap-2">
+    <div className="grid grid-cols-4 gap-3">
       {characters.map(c => (
-        <CharacterCard
-          key={c.id}
-          id={c.id}
-          name={c.name}
-          initialStatus={c.status}
-        />
+        <CharacterCard key={c.id} id={c.id} name={c.name} initialStatus={c.status} />
       ))}
     </div>
   )

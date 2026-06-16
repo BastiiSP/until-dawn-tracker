@@ -15,15 +15,21 @@ export default async function RunsPage() {
 
   return (
     <main className="min-h-screen px-4 py-8 max-w-lg mx-auto">
-      <div className="flex items-center justify-between mb-8">
-        <h1 className="text-2xl font-bold text-horror-text">Your Runs</h1>
-        <Link
-          href="/runs/new"
-          className="flex items-center gap-1.5 bg-horror-accent hover:bg-horror-accent-hover text-white text-sm font-semibold px-3 py-2 rounded-lg transition-colors tap-target"
-        >
-          <Plus size={16} />
-          New Run
-        </Link>
+      <div className="mb-8">
+        <h1 className="font-cinzel text-3xl font-bold tracking-widest text-horror-text mb-1 animate-flicker">
+          UNTIL DAWN
+        </h1>
+        <p className="text-horror-muted text-xs tracking-widest uppercase mb-4">Decision Tracker — Blackwood Mountain</p>
+        <div className="flex items-center justify-between">
+          <span className="text-horror-muted text-sm">{runs?.length ?? 0} run{(runs?.length ?? 0) !== 1 ? 's' : ''}</span>
+          <Link
+            href="/runs/new"
+            className="flex items-center gap-1.5 bg-horror-accent hover:bg-horror-accent-hover text-white text-sm font-semibold px-3 py-2 rounded-lg transition-colors tap-target"
+          >
+            <Plus size={16} />
+            New Run
+          </Link>
+        </div>
       </div>
 
       {runs && runs.length > 0 ? (
