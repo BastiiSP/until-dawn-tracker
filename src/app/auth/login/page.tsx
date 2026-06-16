@@ -1,13 +1,16 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, Suspense } from 'react'
+import { useSearchParams } from 'next/navigation'
 import { createClient } from '@/lib/supabase/client'
 
-export default function LoginPage() {
+function LoginForm() {
   const [email, setEmail] = useState('')
   const [sent, setSent] = useState(false)
   const [loading, setLoading] = useState(false)
   const supabase = createClient()
+  const searchParams = useSearchParams()
+  const errorMsg = searchParams.get('error')
 
   async function handleSubmit(e: React.SyntheticEvent<HTMLFormElement>) {
     e.preventDefault()
@@ -27,6 +30,12 @@ export default function LoginPage() {
           Until Dawn
         </h1>
         <p className="text-horror-muted mb-8 text-sm">Decision Tracker</p>
+
+        {errorMsg && (
+          <div className="bg-red-950 border border-red-800 rounded-lg p-3 mb-4 text-sm text-red-300">
+            {errorMsg}
+          </div>
+        )}
 
         {sent ? (
           <div className="bg-horror-card border border-horror-border rounded-lg p-6 text-center">
@@ -54,5 +63,13 @@ export default function LoginPage() {
         )}
       </div>
     </main>
+  )
+}
+
+export default function LoginPage() {
+  return (
+    <Suspense>
+      <LoginForm />
+    </Suspense>
   )
 }
