@@ -22,7 +22,13 @@ export async function GET(request: NextRequest) {
         },
       }
     )
-    await supabase.auth.exchangeCodeForSession(code)
+    const { error } = await supabase.auth.exchangeCodeForSession(code)
+
+    if (error) {
+      const errorUrl = new URL('/auth/login', origin)
+      errorUrl.searchParams.set('error', 'Der Link ist abgelaufen. Bitte einen neuen anfordern.')
+      return NextResponse.redirect(errorUrl)
+    }
   }
 
   return NextResponse.redirect(`${origin}/runs`)
