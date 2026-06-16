@@ -1,5 +1,6 @@
 import type { PrecacheEntry, SerwistGlobalConfig } from 'serwist'
-import { ExpirationPlugin, NetworkFirst, Serwist } from 'serwist'
+import { Serwist, NetworkFirst, ExpirationPlugin } from 'serwist'
+import { defaultCache } from '@serwist/next/worker'
 
 declare global {
   interface WorkerGlobalScope extends SerwistGlobalConfig {
@@ -7,7 +8,7 @@ declare global {
   }
 }
 
-// @ts-ignore — ServiceWorkerGlobalScope is available at runtime via @serwist/next compilation
+// @ts-ignore — ServiceWorkerGlobalScope not in dom lib
 declare const self: ServiceWorkerGlobalScope
 
 const serwist = new Serwist({
@@ -22,10 +23,11 @@ const serwist = new Serwist({
         cacheName: 'supabase-api',
         networkTimeoutSeconds: 10,
         plugins: [
-          new ExpirationPlugin({ maxEntries: 50, maxAgeSeconds: 300 }),
+          new ExpirationPlugin({ maxEntries: 50, maxAgeSeconds: 86400 }),
         ],
       }),
     },
+    ...defaultCache,
   ],
 })
 
