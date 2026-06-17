@@ -4,6 +4,7 @@ import './globals.css'
 import { SnowEffect } from '@/components/effects/SnowEffect'
 import { LightningEffect } from '@/components/effects/LightningEffect'
 import { MountainSilhouette } from '@/components/effects/MountainSilhouette'
+import { Analytics } from '@vercel/analytics/next'
 
 const inter = Inter({ subsets: ['latin'], display: 'swap' })
 const cinzel = Cinzel({
@@ -48,6 +49,7 @@ export default function RootLayout({
         <LightningEffect />
         <MountainSilhouette />
         {children}
+        <Analytics />
       </body>
     </html>
   )
