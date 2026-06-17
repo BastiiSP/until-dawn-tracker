@@ -96,20 +96,21 @@ export function CardNavigator({ runId, initialDecisions, otherRuns }: CardNaviga
       </div>
 
       {/* Fortschritts-Dots */}
-      <div className="flex gap-0.5 mb-4 overflow-hidden">
+      <div className="flex gap-0.5 mb-4 overflow-hidden py-2">
         {BUTTERFLY_EFFECTS.map((e, i) => (
           <button
             key={e.id}
             onClick={() => navigate(i, i > index ? 'forward' : 'back')}
             className={cn(
-              'h-1 flex-1 rounded-full transition-all duration-200',
+              'h-2 flex-1 rounded-full transition-all duration-200',
               i === index
-                ? 'bg-horror-accent'
+                ? 'bg-horror-accent scale-y-150'
                 : decisions[e.name]
                 ? 'bg-green-800'
                 : 'bg-horror-border'
             )}
             aria-label={`Szene ${i + 1}: ${e.nameDe}`}
+            title={e.nameDe}
           />
         ))}
       </div>
