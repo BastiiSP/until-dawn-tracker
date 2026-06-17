@@ -12,10 +12,11 @@ export default async function ComparePage({
   const { id } = await params
   const supabase = await createClient()
   const { data: { user } } = await supabase.auth.getUser()
+  if (!user) notFound()
 
   const [{ data: currentRun }, { data: allRuns }, { data: currentDecisions }] = await Promise.all([
-    supabase.from('runs').select('id, name').eq('id', id).eq('user_id', user!.id).single(),
-    supabase.from('runs').select('id, name').eq('user_id', user!.id).neq('id', id).order('created_at', { ascending: false }),
+    supabase.from('runs').select('id, name').eq('id', id).eq('user_id', user.id).single(),
+    supabase.from('runs').select('id, name').eq('user_id', user.id).neq('id', id).order('created_at', { ascending: false }),
     supabase.from('decisions').select('butterfly_effect_name, chosen_option').eq('run_id', id),
   ])
 

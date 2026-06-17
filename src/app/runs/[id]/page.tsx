@@ -9,6 +9,7 @@ export default async function RunPage({ params }: { params: Promise<{ id: string
   const { id } = await params
   const supabase = await createClient()
   const { data: { user } } = await supabase.auth.getUser()
+  if (!user) notFound()
 
   const [
     { data: run },
@@ -16,10 +17,10 @@ export default async function RunPage({ params }: { params: Promise<{ id: string
     { data: decisions },
     { data: allRuns },
   ] = await Promise.all([
-    supabase.from('runs').select('id, name').eq('id', id).single(),
+    supabase.from('runs').select('id, name').eq('id', id).eq('user_id', user.id).single(),
     supabase.from('characters').select('id, name, status').eq('run_id', id).order('name'),
     supabase.from('decisions').select('butterfly_effect_name, chosen_option').eq('run_id', id),
-    supabase.from('runs').select('id, name').eq('user_id', user!.id).neq('id', id).order('created_at', { ascending: false }),
+    supabase.from('runs').select('id, name').eq('user_id', user.id).neq('id', id).order('created_at', { ascending: false }),
   ])
 
   if (!run) notFound()

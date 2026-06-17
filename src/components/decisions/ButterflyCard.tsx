@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import { createClient } from '@/lib/supabase/client'
 import { cn } from '@/lib/utils'
 import type { ButterflyEffect } from '@/lib/data/butterfly-effects'
@@ -35,15 +35,15 @@ const CHAPTER_GRADIENTS: Record<number, string> = {
 
 export function ButterflyCard({ effect, runId, existingChoice, otherRunChoices, onChoiceChanged }: ButterflyCardProps) {
   const [chosen, setChosen] = useState<string | undefined>(existingChoice)
-  const [loading, setLoading] = useState(false)
+  const loadingRef = useRef(false)
   const supabase = createClient()
 
   async function handleOption(option: string) {
-    if (loading) return
+    if (loadingRef.current) return
 
     // Undo: erneuter Klick auf gewählte Option → Auswahl aufheben
     if (chosen === option) {
-      setLoading(true)
+      loadingRef.current = true
       setChosen(undefined)
       onChoiceChanged(effect.name, null)
       await supabase
@@ -51,11 +51,11 @@ export function ButterflyCard({ effect, runId, existingChoice, otherRunChoices, 
         .delete()
         .eq('run_id', runId)
         .eq('butterfly_effect_name', effect.name)
-      setLoading(false)
+      loadingRef.current = false
       return
     }
 
-    setLoading(true)
+    loadingRef.current = true
     setChosen(option)
     onChoiceChanged(effect.name, option)
 
@@ -77,7 +77,7 @@ export function ButterflyCard({ effect, runId, existingChoice, otherRunChoices, 
       chosen_option: option,
     })
 
-    setLoading(false)
+    loadingRef.current = false
   }
 
   const gradient = CHAPTER_GRADIENTS[effect.chapter] ?? CHAPTER_GRADIENTS[0]
@@ -155,7 +155,7 @@ export function ButterflyCard({ effect, runId, existingChoice, otherRunChoices, 
               <button
                 key={dbOption}
                 onClick={() => handleOption(dbOption)}
-                disabled={loading}
+
                 className={cn(
                   'rounded-lg py-4 px-3 text-sm font-semibold transition-all duration-150 active:scale-95 tap-target text-center leading-tight',
                   isChosen
