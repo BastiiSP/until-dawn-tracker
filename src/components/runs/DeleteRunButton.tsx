@@ -18,8 +18,13 @@ export function DeleteRunButton({ runId, runName }: DeleteRunButtonProps) {
   const supabase = createClient()
 
   async function handleDelete() {
+    if (loading) return
     setLoading(true)
-    await supabase.from('runs').delete().eq('id', runId)
+    const { error } = await supabase.from('runs').delete().eq('id', runId)
+    if (error) {
+      setLoading(false)
+      return
+    }
     router.refresh()
   }
 
@@ -38,7 +43,8 @@ export function DeleteRunButton({ runId, runName }: DeleteRunButtonProps) {
         </button>
         <button
           onClick={() => setConfirming(false)}
-          className="text-xs text-horror-muted border border-horror-border hover:border-horror-accent rounded px-2 py-1 transition-colors"
+          disabled={loading}
+          className="text-xs text-horror-muted border border-horror-border hover:border-horror-accent rounded px-2 py-1 transition-colors disabled:opacity-50"
         >
           Nein
         </button>
