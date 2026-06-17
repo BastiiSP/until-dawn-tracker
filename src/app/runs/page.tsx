@@ -3,6 +3,7 @@ import { Plus } from 'lucide-react'
 import { createClient } from '@/lib/supabase/server'
 import { RunCard } from '@/components/runs/RunCard'
 import { LogoutButton } from '@/components/runs/LogoutButton'
+import { DeleteRunButton } from '@/components/runs/DeleteRunButton'
 
 export default async function RunsPage() {
   const supabase = await createClient()
@@ -39,7 +40,12 @@ export default async function RunsPage() {
       {runs && runs.length > 0 ? (
         <div className="space-y-3">
           {runs.map(run => (
-            <RunCard key={run.id} id={run.id} name={run.name} createdAt={run.created_at} />
+            <div key={run.id} className="flex items-center gap-2">
+              <div className="flex-1 min-w-0">
+                <RunCard id={run.id} name={run.name} createdAt={run.created_at} />
+              </div>
+              <DeleteRunButton runId={run.id} runName={run.name} />
+            </div>
           ))}
         </div>
       ) : (
