@@ -35,6 +35,7 @@ const CHAPTER_GRADIENTS: Record<number, string> = {
 
 export function ButterflyCard({ effect, runId, existingChoice, otherRunChoices, onChoiceChanged }: ButterflyCardProps) {
   const [chosen, setChosen] = useState<string | undefined>(existingChoice)
+  const [imgError, setImgError] = useState(false)
   const loadingRef = useRef(false)
   const supabase = createClient()
 
@@ -87,15 +88,19 @@ export function ButterflyCard({ effect, runId, existingChoice, otherRunChoices, 
     <div className="rounded-xl overflow-hidden border border-horror-border shadow-2xl">
       {/* Szenen-Bild oder Gradient-Fallback */}
       <div className="relative h-48 overflow-hidden">
-        <img
-          src={`/scenes/${effect.sceneImage}`}
-          alt=""
-          className="w-full h-full object-cover"
-          onError={(e) => {
-            (e.target as HTMLImageElement).style.display = 'none'
-          }}
-        />
-        <div className={cn('absolute inset-0 bg-gradient-to-b', gradient)} />
+        {!imgError && effect.sceneImage && (
+          <img
+            src={`/scenes/${effect.sceneImage}`}
+            alt=""
+            className="w-full h-full object-cover"
+            onError={() => setImgError(true)}
+          />
+        )}
+        {/* Fallback-Gradient wenn kein Bild */}
+        {(imgError || !effect.sceneImage) && (
+          <div className={cn('absolute inset-0 bg-gradient-to-b', gradient)} />
+        )}
+        {/* Immer: Fade nach unten */}
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-horror-bg" />
 
         {/* Kapitel + Szenenname */}
