@@ -2,7 +2,7 @@ import { createClient } from '@/lib/supabase/server'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import { ArrowLeft } from 'lucide-react'
-import { ComparisonViewClient } from '@/components/comparison/ComparisonViewClient'
+import { RunTimeline } from '@/components/comparison/RunTimeline'
 
 export default async function ComparePage({
   params,
@@ -13,36 +13,48 @@ export default async function ComparePage({
   const supabase = await createClient()
   const { data: { user } } = await supabase.auth.getUser()
 
-  const [{ data: currentRun }, { data: allRuns }] = await Promise.all([
+  const [{ data: currentRun }, { data: allRuns }, { data: currentDecisions }] = await Promise.all([
     supabase.from('runs').select('id, name').eq('id', id).eq('user_id', user!.id).single(),
-    supabase
-      .from('runs')
-      .select('id, name')
-      .eq('user_id', user!.id)
-      .neq('id', id)
-      .order('created_at', { ascending: false }),
+    supabase.from('runs').select('id, name').eq('user_id', user!.id).neq('id', id).order('created_at', { ascending: false }),
+    supabase.from('decisions').select('butterfly_effect_name, chosen_option').eq('run_id', id),
   ])
 
   if (!currentRun) notFound()
 
-  const { data: currentDecisions } = await supabase
-    .from('decisions')
-    .select('butterfly_effect_name, chosen_option')
-    .eq('run_id', id)
+  const otherRunsWithDecisions = await Promise.all(
+    (allRuns ?? []).map(async (r) => {
+      const { data: decisions } = await supabase
+        .from('decisions')
+        .select('butterfly_effect_name, chosen_option')
+        .eq('run_id', r.id)
+      return {
+        id: r.id,
+        name: r.name,
+        choices: Object.fromEntries(
+          (decisions ?? []).map(d => [d.butterfly_effect_name, d.chosen_option])
+        ),
+      }
+    })
+  )
 
   return (
-    <main className="min-h-screen px-4 py-8 max-w-lg mx-auto">
+    <main className="min-h-screen px-4 py-8 max-w-lg mx-auto pb-24">
       <div className="flex items-center gap-3 mb-6">
         <Link href={`/runs/${id}`} className="text-horror-muted tap-target flex items-center">
           <ArrowLeft size={20} />
         </Link>
-        <h1 className="text-xl font-bold text-horror-text font-cinzel">Vergleich</h1>
+        <h1 className="font-cinzel text-xl font-bold text-horror-text">Run-Vergleich</h1>
       </div>
 
-      <ComparisonViewClient
-        currentRunName={currentRun.name}
-        currentDecisions={currentDecisions ?? []}
-        otherRuns={(allRuns ?? []).map(r => ({ id: r.id, name: r.name }))}
+      <RunTimeline
+        currentRun={{
+          id: currentRun.id,
+          name: currentRun.name,
+          choices: Object.fromEntries(
+            (currentDecisions ?? []).map(d => [d.butterfly_effect_name, d.chosen_option])
+          ),
+        }}
+        otherRuns={otherRunsWithDecisions}
       />
     </main>
   )
