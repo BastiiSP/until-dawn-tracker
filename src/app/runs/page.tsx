@@ -2,6 +2,7 @@ import Link from 'next/link'
 import { Plus } from 'lucide-react'
 import { createClient } from '@/lib/supabase/server'
 import { RunCard } from '@/components/runs/RunCard'
+import { LogoutButton } from '@/components/runs/LogoutButton'
 
 export default async function RunsPage() {
   const supabase = await createClient()
@@ -22,13 +23,16 @@ export default async function RunsPage() {
         <p className="text-horror-muted text-xs tracking-widest uppercase mb-4">Entscheidungs-Tracker — Blackwood Mountain</p>
         <div className="flex items-center justify-between">
           <span className="text-horror-muted text-sm">{runs?.length ?? 0} {(runs?.length ?? 0) === 1 ? 'Run' : 'Runs'}</span>
-          <Link
-            href="/runs/new"
-            className="flex items-center gap-1.5 bg-horror-accent hover:bg-horror-accent-hover text-white text-sm font-semibold px-3 py-2 rounded-lg transition-colors tap-target"
-          >
-            <Plus size={16} />
-            Neuer Run
-          </Link>
+          <div className="flex items-center gap-2">
+            <LogoutButton />
+            <Link
+              href="/runs/new"
+              className="flex items-center gap-1.5 bg-horror-accent hover:bg-horror-accent-hover text-white text-sm font-semibold px-3 py-2 rounded-lg transition-colors tap-target"
+            >
+              <Plus size={16} />
+              Neuer Run
+            </Link>
+          </div>
         </div>
       </div>
 
