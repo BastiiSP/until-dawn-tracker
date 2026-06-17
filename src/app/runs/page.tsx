@@ -19,7 +19,7 @@ export default async function RunsPage() {
         <h1 className="font-cinzel text-3xl font-bold tracking-widest text-horror-text mb-1 animate-flicker">
           UNTIL DAWN
         </h1>
-        <p className="text-horror-muted text-xs tracking-widest uppercase mb-4">Decision Tracker — Blackwood Mountain</p>
+        <p className="text-horror-muted text-xs tracking-widest uppercase mb-4">Entscheidungs-Tracker — Blackwood Mountain</p>
         <div className="flex items-center justify-between">
           <span className="text-horror-muted text-sm">{runs?.length ?? 0} run{(runs?.length ?? 0) !== 1 ? 's' : ''}</span>
           <Link
@@ -27,7 +27,7 @@ export default async function RunsPage() {
             className="flex items-center gap-1.5 bg-horror-accent hover:bg-horror-accent-hover text-white text-sm font-semibold px-3 py-2 rounded-lg transition-colors tap-target"
           >
             <Plus size={16} />
-            New Run
+            Neuer Run
           </Link>
         </div>
       </div>
@@ -40,8 +40,8 @@ export default async function RunsPage() {
         </div>
       ) : (
         <div className="text-center py-16">
-          <p className="text-horror-muted">No runs yet.</p>
-          <p className="text-horror-muted text-sm mt-1">Create your first run to get started.</p>
+          <p className="text-horror-muted">Noch keine Runs vorhanden.</p>
+          <p className="text-horror-muted text-sm mt-1">Erstelle deinen ersten Run, um zu beginnen.</p>
         </div>
       )}
     </main>

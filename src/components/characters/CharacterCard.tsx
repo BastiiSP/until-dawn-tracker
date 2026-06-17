@@ -13,8 +13,8 @@ const STATUS_CYCLE: Record<Status, Status> = {
 }
 
 const STATUS_LABELS: Record<Status, string> = {
-  alive:   'ALIVE',
-  dead:    'DEAD',
+  alive:   'LEBT',
+  dead:    'TOT',
   unknown: '?',
 }
 
