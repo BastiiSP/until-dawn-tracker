@@ -8,6 +8,7 @@ function LoginForm() {
   const [email, setEmail] = useState('')
   const [sent, setSent] = useState(false)
   const [loading, setLoading] = useState(false)
+  const [otpError, setOtpError] = useState<string | null>(null)
   const supabase = createClient()
   const searchParams = useSearchParams()
   const errorMsg = searchParams.get('error')
@@ -15,11 +16,17 @@ function LoginForm() {
   async function handleSubmit(e: React.SyntheticEvent<HTMLFormElement>) {
     e.preventDefault()
     setLoading(true)
+    setOtpError(null)
     const { error } = await supabase.auth.signInWithOtp({
       email,
       options: { emailRedirectTo: `${location.origin}/auth/callback` },
     })
-    if (!error) setSent(true)
+    if (error) {
+      setOtpError('Fehler beim Senden. Bitte versuche es erneut.')
+      setLoading(false)
+      return
+    }
+    setSent(true)
     setLoading(false)
   }
 
@@ -43,37 +50,37 @@ function LoginForm() {
           aria-hidden
         >
           <defs>
-            <filter id="goldGlow">
+            <filter id="login-goldGlow">
               <feGaussianBlur stdDeviation="2.5" result="blur" />
               <feComposite in="SourceGraphic" in2="blur" operator="over" />
             </filter>
-            <linearGradient id="sandTop" x1="0" y1="0" x2="0" y2="1">
+            <linearGradient id="login-sandTop" x1="0" y1="0" x2="0" y2="1">
               <stop offset="0%" stopColor="#c9a84c" stopOpacity="0.9" />
               <stop offset="100%" stopColor="#c9a84c" stopOpacity="0.1" />
             </linearGradient>
-            <linearGradient id="sandBottom" x1="0" y1="0" x2="0" y2="1">
+            <linearGradient id="login-sandBottom" x1="0" y1="0" x2="0" y2="1">
               <stop offset="0%" stopColor="#c9a84c" stopOpacity="0.1" />
               <stop offset="100%" stopColor="#c9a84c" stopOpacity="0.8" />
             </linearGradient>
           </defs>
 
-          <rect x="8" y="3" width="84" height="7" rx="2" fill="#c9a84c" filter="url(#goldGlow)" />
+          <rect x="8" y="3" width="84" height="7" rx="2" fill="#c9a84c" filter="url(#login-goldGlow)" />
 
           <polygon points="8,10 92,10 50,62" fill="#0a0a0a" stroke="#c9a84c" strokeWidth="1.5" />
-          <polygon points="12,13 88,13 50,57" fill="url(#sandTop)" />
+          <polygon points="12,13 88,13 50,57" fill="url(#login-sandTop)" />
 
           <line x1="50" y1="62" x2="50" y2="72" stroke="#c9a84c" strokeWidth="1.8" opacity="0.9" />
           <ellipse cx="50" cy="67" rx="2" ry="5" fill="#c9a84c" opacity="0.3" />
 
           <polygon points="8,120 92,120 50,68" fill="#0a0a0a" stroke="#c9a84c" strokeWidth="1.5" />
-          <polygon points="14,116 86,116 50,74" fill="url(#sandBottom)" />
+          <polygon points="14,116 86,116 50,74" fill="url(#login-sandBottom)" />
 
-          <rect x="8" y="120" width="84" height="7" rx="2" fill="#c9a84c" filter="url(#goldGlow)" />
+          <rect x="8" y="120" width="84" height="7" rx="2" fill="#c9a84c" filter="url(#login-goldGlow)" />
 
           <rect x="4" y="10" width="4" height="110" rx="1" fill="#111" stroke="#c9a84c" strokeWidth="0.5" />
           <rect x="92" y="10" width="4" height="110" rx="1" fill="#111" stroke="#c9a84c" strokeWidth="0.5" />
 
-          <circle cx="50" cy="65" r="3" fill="#c9a84c" opacity="0.9" filter="url(#goldGlow)" />
+          <circle cx="50" cy="65" r="3" fill="#c9a84c" opacity="0.9" filter="url(#login-goldGlow)" />
         </svg>
 
         <h2
@@ -97,6 +104,12 @@ function LoginForm() {
         {errorMsg && (
           <div className="bg-red-950/80 border border-red-800 rounded-lg p-3 mb-4 text-sm text-red-300">
             {errorMsg}
+          </div>
+        )}
+
+        {otpError && (
+          <div className="bg-red-950/80 border border-red-800 rounded-lg p-3 mb-4 text-sm text-red-300">
+            {otpError}
           </div>
         )}
 
