@@ -24,87 +24,103 @@ function LoginForm() {
   }
 
   return (
-    <main className="min-h-screen flex items-center justify-center px-4">
-      <div className="w-full max-w-sm">
-        <div className="mb-8 flex flex-col items-center text-center">
-          {/* Until Dawn iconic hourglass — black body, gold frame, title integrated */}
-          <svg
-            viewBox="0 0 80 110"
-            className="w-16 h-[88px] mb-5"
-            xmlns="http://www.w3.org/2000/svg"
-            aria-hidden
-          >
-            {/* Outer gold frame — top bar */}
-            <rect x="4" y="0" width="72" height="6" rx="2" fill="#c9a84c" />
-            {/* Outer gold frame — bottom bar */}
-            <rect x="4" y="104" width="72" height="6" rx="2" fill="#c9a84c" />
+    <main className="min-h-screen flex flex-col items-center justify-between px-6 py-12 pb-32">
 
-            {/* Hourglass body outline */}
-            <path
-              d="M8,6 L72,6 L40,52 L72,104 L8,104 L40,52 Z"
-              fill="#0a0a0a"
-              stroke="#c9a84c"
-              strokeWidth="1.5"
-            />
+      {/* Logo-Bereich */}
+      <div className="flex-1 flex flex-col items-center justify-center w-full max-w-xs">
 
-            {/* Upper sand (draining) */}
-            <path d="M12,9 L68,9 L40,46 Z" fill="#c9a84c" opacity="0.25" />
+        <h1
+          className="font-cinzel-decorative text-5xl font-black tracking-[0.2em] text-horror-text"
+          style={{ textShadow: '0 0 30px rgba(220,38,38,0.4), 0 0 60px rgba(220,38,38,0.15)' }}
+        >
+          UNTIL
+        </h1>
 
-            {/* Sand stream at neck */}
-            <line x1="40" y1="52" x2="40" y2="62" stroke="#c9a84c" strokeWidth="1.5" opacity="0.6" />
+        <svg
+          viewBox="0 0 100 130"
+          className="w-28 h-36 my-1"
+          xmlns="http://www.w3.org/2000/svg"
+          aria-hidden
+        >
+          <defs>
+            <filter id="goldGlow">
+              <feGaussianBlur stdDeviation="2.5" result="blur" />
+              <feComposite in="SourceGraphic" in2="blur" operator="over" />
+            </filter>
+            <linearGradient id="sandTop" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stopColor="#c9a84c" stopOpacity="0.9" />
+              <stop offset="100%" stopColor="#c9a84c" stopOpacity="0.1" />
+            </linearGradient>
+            <linearGradient id="sandBottom" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stopColor="#c9a84c" stopOpacity="0.1" />
+              <stop offset="100%" stopColor="#c9a84c" stopOpacity="0.8" />
+            </linearGradient>
+          </defs>
 
-            {/* Lower sand (accumulating) */}
-            <path d="M22,101 L58,101 L52,72 L28,72 Z" fill="#c9a84c" opacity="0.35" />
+          <rect x="8" y="3" width="84" height="7" rx="2" fill="#c9a84c" filter="url(#goldGlow)" />
 
-            {/* Decorative side pillars */}
-            <rect x="4" y="6" width="4" height="98" rx="1" fill="#1a1a1a" stroke="#c9a84c" strokeWidth="0.5" />
-            <rect x="72" y="6" width="4" height="98" rx="1" fill="#1a1a1a" stroke="#c9a84c" strokeWidth="0.5" />
+          <polygon points="8,10 92,10 50,62" fill="#0a0a0a" stroke="#c9a84c" strokeWidth="1.5" />
+          <polygon points="12,13 88,13 50,57" fill="url(#sandTop)" />
 
-            {/* "UNTIL DAWN" text integrated into middle */}
-            <text
-              x="40"
-              y="56"
-              textAnchor="middle"
-              fill="#c9a84c"
-              fontSize="5"
-              fontFamily="Georgia, serif"
-              letterSpacing="2"
-              fontWeight="bold"
-            >UNTIL DAWN</text>
-          </svg>
-          <h1 className="font-cinzel text-4xl font-black text-horror-accent tracking-widest text-glow-red animate-flicker">
-            UNTIL DAWN
-          </h1>
-          <p className="text-horror-muted text-xs tracking-widest uppercase mt-1">Blackwood Mountain — Entscheidungs-Tracker</p>
+          <line x1="50" y1="62" x2="50" y2="72" stroke="#c9a84c" strokeWidth="1.8" opacity="0.9" />
+          <ellipse cx="50" cy="67" rx="2" ry="5" fill="#c9a84c" opacity="0.3" />
+
+          <polygon points="8,120 92,120 50,68" fill="#0a0a0a" stroke="#c9a84c" strokeWidth="1.5" />
+          <polygon points="14,116 86,116 50,74" fill="url(#sandBottom)" />
+
+          <rect x="8" y="120" width="84" height="7" rx="2" fill="#c9a84c" filter="url(#goldGlow)" />
+
+          <rect x="4" y="10" width="4" height="110" rx="1" fill="#111" stroke="#c9a84c" strokeWidth="0.5" />
+          <rect x="92" y="10" width="4" height="110" rx="1" fill="#111" stroke="#c9a84c" strokeWidth="0.5" />
+
+          <circle cx="50" cy="65" r="3" fill="#c9a84c" opacity="0.9" filter="url(#goldGlow)" />
+        </svg>
+
+        <h2
+          className="font-cinzel-decorative text-5xl font-black tracking-[0.2em] text-horror-text"
+          style={{ textShadow: '0 0 30px rgba(220,38,38,0.4), 0 0 60px rgba(220,38,38,0.15)' }}
+        >
+          DAWN
+        </h2>
+
+        <div className="mt-5 flex items-center gap-3 w-full">
+          <div className="flex-1 h-px bg-gradient-to-r from-transparent to-[#c9a84c]" />
+          <span className="text-[#c9a84c] text-[9px] tracking-[0.3em] font-cinzel uppercase opacity-70">
+            Blackwood Mountain
+          </span>
+          <div className="flex-1 h-px bg-gradient-to-l from-transparent to-[#c9a84c]" />
         </div>
+      </div>
 
+      {/* Formular-Bereich */}
+      <div className="w-full max-w-xs">
         {errorMsg && (
-          <div className="bg-red-950 border border-red-800 rounded-lg p-3 mb-4 text-sm text-red-300">
+          <div className="bg-red-950/80 border border-red-800 rounded-lg p-3 mb-4 text-sm text-red-300">
             {errorMsg}
           </div>
         )}
 
         {sent ? (
-          <div className="bg-horror-card border border-horror-border rounded-lg p-6 text-center">
-            <p className="text-horror-text">Prüfe deine E-Mails für den Magic Link.</p>
-            <p className="text-horror-muted text-sm mt-2">Du kannst diesen Tab schließen.</p>
+          <div className="text-center py-4">
+            <p className="text-horror-text text-sm">Prüfe deine E-Mails für den Magic Link.</p>
+            <p className="text-horror-muted text-xs mt-2">Du kannst diesen Tab schließen.</p>
           </div>
         ) : (
-          <form onSubmit={handleSubmit} className="space-y-4">
+          <form onSubmit={handleSubmit} className="space-y-3">
             <input
               type="email"
               value={email}
               onChange={e => setEmail(e.target.value)}
               placeholder="deine@email.de"
               required
-              className="w-full bg-horror-card border border-horror-border rounded-lg px-4 py-3 text-horror-text placeholder-horror-muted focus:outline-none focus:border-horror-accent transition-colors"
+              className="w-full bg-black/60 border border-horror-border rounded-lg px-4 py-3 text-horror-text placeholder-horror-muted/50 focus:outline-none focus:border-[#c9a84c] transition-colors text-sm tracking-wide"
             />
             <button
               type="submit"
               disabled={loading}
-              className="w-full bg-horror-accent hover:bg-horror-accent-hover disabled:opacity-50 text-white font-semibold rounded-lg px-4 py-3 transition-colors tap-target"
+              className="w-full border border-[#c9a84c]/60 hover:border-[#c9a84c] hover:bg-[#c9a84c]/10 disabled:opacity-40 text-[#c9a84c] font-cinzel text-sm font-bold tracking-[0.15em] uppercase rounded-lg px-4 py-3 transition-all tap-target"
             >
-              {loading ? 'Sende…' : 'Magic Link senden'}
+              {loading ? 'Sende…' : 'Eintreten'}
             </button>
           </form>
         )}
