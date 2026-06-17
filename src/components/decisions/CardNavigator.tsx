@@ -96,7 +96,7 @@ export function CardNavigator({ runId, initialDecisions, otherRuns }: CardNaviga
       </div>
 
       {/* Fortschritts-Dots */}
-      <div className="flex gap-0.5 mb-4 overflow-hidden py-2">
+      <div className="flex gap-0.5 mb-4 overflow-x-hidden py-2">
         {BUTTERFLY_EFFECTS.map((e, i) => (
           <button
             key={e.id}
