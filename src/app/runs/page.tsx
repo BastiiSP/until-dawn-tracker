@@ -21,7 +21,7 @@ export default async function RunsPage() {
         </h1>
         <p className="text-horror-muted text-xs tracking-widest uppercase mb-4">Entscheidungs-Tracker — Blackwood Mountain</p>
         <div className="flex items-center justify-between">
-          <span className="text-horror-muted text-sm">{runs?.length ?? 0} run{(runs?.length ?? 0) !== 1 ? 's' : ''}</span>
+          <span className="text-horror-muted text-sm">{runs?.length ?? 0} {(runs?.length ?? 0) === 1 ? 'Run' : 'Runs'}</span>
           <Link
             href="/runs/new"
             className="flex items-center gap-1.5 bg-horror-accent hover:bg-horror-accent-hover text-white text-sm font-semibold px-3 py-2 rounded-lg transition-colors tap-target"
