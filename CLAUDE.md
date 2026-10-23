@@ -137,16 +137,6 @@ Set locally in `.env.local`. Set on Vercel via dashboard or `vercel env add`.
 | `vercel env add`   | Add env var to Vercel project        |
 | `vercel --prod`    | Deploy to production                 |
 
-## Vercel Deployment
-1. `npm install -g vercel` (once)
-2. `vercel login` (once — opens browser)
-3. From project root: `vercel link` → follow prompts
-4. Add env vars: `vercel env add NEXT_PUBLIC_SUPABASE_URL` etc.
-5. Deploy: `vercel --prod`
-
-Or connect the GitHub repo in Vercel dashboard for auto-deploy on push.
-The `vercel.json` / `vercel.ts` is not needed — Vercel auto-detects Next.js.
-
 ## Conventions
 - **File naming:** `PascalCase` for components, `camelCase` for utilities
 - **Imports:** always use `@/*` alias (configured in tsconfig)
@@ -157,3 +147,34 @@ The `vercel.json` / `vercel.ts` is not needed — Vercel auto-detects Next.js.
 - **Language:** UI copy is in German (`nameDe`, `descriptionDe`, `optionsDe`);
   DB keys remain English (`name`, `options`)
 - **No comments** unless behavior would surprise a reader
+
+<!-- BEGIN:nextjs-agent-rules -->
+# This is NOT the Next.js you know
+
+This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` before writing any code. Heed deprecation notices.
+<!-- END:nextjs-agent-rules -->
+
+Public repository: no private document paths, personal data or secrets in instructions. Deployments require an authorized task.
+
+## Pflege dieses Dateipaars
+
+Direkte aktuelle Nutzeraufträge haben Vorrang. Vor Regeländerungen beide Dateien lesen und Unterschiede inhaltlich zusammenführen; gültige Regeln erhalten. AGENTS.md und CLAUDE.md unmittelbar gemeinsam ändern und danach mit `cmp` auf Bytegleichheit prüfen. Anbieterunterschiede ausdrücklich kennzeichnen und in beiden Dateien führen. Codex lädt AGENTS.md; Claude Code lädt bei diesem Paar CLAUDE.md.
+
+## Abschluss: Claudian-Update
+
+Nach jeder erledigten Implementierungsaufgabe dieses Format mit tatsächlichen Ergebnissen ausgeben; es ersetzt keine unabhängige Prüfung:
+```text
+## Claudian-Update – [Datum]
+
+### Implementiert
+- [Was gebaut / geändert wurde]
+
+### Getestet
+- [Was getestet wurde und Ergebnis]
+
+### Offen / Nächster Block
+- [Was als nächstes kommt]
+
+### Technische Notizen
+- [Wichtige Entscheidungen, neue Pakete, IDs etc.]
+```
